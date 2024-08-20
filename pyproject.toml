@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools", "swig"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [
+    { name = "Nobuyuki Sekimori", email = "43375309+juno-rmks@users.noreply.github.com"},
+]
+name = "marisa-bindings"
+description = "An unofficial project that provides Python bindings for the MARISA Trie, which is implemented in C++ using SWIG."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: C++",
+    "Programming Language :: Python",
+]
+dependencies = []
+dynamic = ["version"]
+
+[project.urls]
+"Source Code" = "https://github.com/juno-rmks/marisa-bindings/"
+"Issue Tracker" = "https://github.com/juno-rmks/marisa-bindings/issues/"
+"Documentation" = "https://marisa-bindings.readthedocs.io/"
+
+[project.optional-dependencies]
+test = ["pytest", "coverage", "pytest-benchmark", "pytest-mock"]
+doc = ["Sphinx", "sphinx-intl", "sphinx-rtd-theme", "myst-parser"]
+dev = ["build", "twine", "pylint", "black", "isort", "marisa-bindings[test,doc]"]
+
+[tool.setuptools.dynamic]
+version = { attr = "marisa_bindings.__version__" }
+
+[tool.pylint.format]
+max-line-length = "88"
+
+[tool.black]
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib", "--benchmark-skip"]
+filterwarnings = ["error"]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.coverage.report]
+exclude_lines = ["if __name__ == .__main__.:"]

@@ -1,0 +1,3 @@
+recursive-include marisa-trie/include *.h
+recursive-include marisa-trie/lib *.h
+include marisa-trie/bindings/marisa-swig.h

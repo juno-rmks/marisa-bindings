@@ -1,0 +1,20 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+    },
+    "pylint.args": [
+        "--max-line-length",
+        "88"
+    ],
+    "black-formatter.args": [
+        "--skip-string-normalization"
+    ],
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+}
