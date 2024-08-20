@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 authors = [
-    { name = "Nobuyuki Sekimori", email = "43375309+juno-rmks@users.noreply.github.com"},
+    { name = "Nobuyuki Sekimori", email = "43375309+juno-rmks@users.noreply.github.com" },
 ]
 name = "marisa-bindings"
 description = "An unofficial project that provides Python bindings for the MARISA Trie, which is implemented in C++ using SWIG."
@@ -27,8 +27,20 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 test = ["pytest", "coverage", "pytest-benchmark", "pytest-mock"]
-doc = ["Sphinx", "sphinx-intl", "sphinx-rtd-theme", "myst-parser"]
-dev = ["build", "twine", "pylint", "black", "isort", "marisa-bindings[test,doc]"]
+doc = [
+    "Sphinx==5.3.0",
+    "sphinx-intl==2.1.0",
+    "sphinx-rtd-theme==1.2.0",
+    "myst-parser==1.0.0",
+]
+dev = [
+    "build",
+    "twine",
+    "pylint",
+    "black",
+    "isort",
+    "marisa-bindings[test,doc]",
+]
 
 [tool.setuptools.dynamic]
 version = { attr = "marisa_bindings.__version__" }
