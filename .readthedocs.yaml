@@ -9,7 +9,10 @@ python:
     - method: pip
       path: .
       extra_requirements:
-        - docs
+        - doc
 sphinx:
   builder: html
   fail_on_warning: true
+submodules:
+  include: all
+  recursive: true
