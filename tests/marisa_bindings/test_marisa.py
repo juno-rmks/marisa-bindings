@@ -1,70 +1,90 @@
-"""
-This script showcases the basic usage of the `marisa-bindings` library,
-which provides bindings for the MARISA trie. It covers key insertion,
-trie construction, querying (including exact, prefix, and predictive searches),
-and saving/loading the trie.
-"""
+import pytest
 
 from marisa_bindings import marisa
 
-# Create a keyset and add some strings to it
-keyset = marisa.Keyset()
-keys = ["cake", "cookie", "ice", "ice-cream"]
 
-for key in keys:
-    keyset.push_back(key)
+def test_basic_usage_end_to_end(tmp_path: pytest.TempPathFactory):
+    # Create a keyset and add some strings to it
+    keyset = marisa.Keyset()
+    keys = ["cake", "cookie", "ice", "ice-cream"]
+    for key in keys:
+        keyset.push_back(key)
 
-# Build a trie from the keyset
-trie = marisa.Trie()
-trie.build(keyset)
+    # Build a trie from the keyset
+    trie = marisa.Trie()
+    trie.build(keyset)
 
-# Print information about the constructed trie
-print(f"no. keys: {trie.num_keys()}")
-print(f"no. tries: {trie.num_tries()}")
-print(f"no. nodes: {trie.num_nodes()}")
-print(f"size: {trie.io_size()}")
+    # Basic sanity checks about the constructed trie
+    assert trie.num_keys() == 4
+    assert trie.num_tries() >= 1
+    assert trie.num_nodes() > 0
+    assert trie.io_size() > 0
 
-# Perform exact lookups using an agent
-agent = marisa.Agent()
+    # Perform exact lookups using an agent
+    agent = marisa.Agent()
 
-for key in ["cake", "cookie"]:
-    agent.set_query(key)
-    trie.lookup(agent)
-    print(f"{agent.query_str()}: {agent.key_id()}")
+    agent.set_query("cake")
+    assert trie.lookup(agent) is True
+    assert agent.query_str() == "cake"
+    assert agent.key_id() != marisa.INVALID_KEY_ID
 
-# Lookup for a non-existent key
-agent.set_query("cockoo")
+    agent.set_query("cookie")
+    assert trie.lookup(agent) is True
+    assert agent.query_str() == "cookie"
+    assert agent.key_id() != marisa.INVALID_KEY_ID
 
-if not trie.lookup(agent):
-    print(f"{agent.query_str()}: not found")
+    # Lookup for a non-existent key (agent)
+    agent.set_query("cockoo")
+    assert trie.lookup(agent) is False
 
-# Directly lookup keys without using an agent
-print(f"ice: {trie.lookup('ice')}")
-print(f"ice-cream: {trie.lookup('ice-cream')}")
+    # Direct lookup without agent
+    assert trie.lookup("ice") != marisa.INVALID_KEY_ID
+    assert trie.lookup("ice-cream") != marisa.INVALID_KEY_ID
 
-# Check if a non-existent key returns INVALID_KEY_ID
-if trie.lookup("ice-age") == marisa.INVALID_KEY_ID:
-    print("ice-age: not found")
+    # Non-existent key should be INVALID_KEY_ID
+    assert trie.lookup("ice-age") == marisa.INVALID_KEY_ID
 
-# Save the trie to a file and reload it
-trie.save("sample.dic")
-trie.load("sample.dic")
+    # Save the trie to a file and reload it
+    dic_path = tmp_path / "sample.dic"
+    trie.save(str(dic_path))
 
-# Perform reverse lookups by key ID
-for key_id in range(4):
-    agent.set_query(key_id)
-    trie.reverse_lookup(agent)
-    print(f"{agent.query_id()}: {agent.key_str()}")
+    trie2 = marisa.Trie()
+    trie2.load(str(dic_path))
+    assert trie2.num_keys() == 4
 
-# Memory-map the trie from the file and perform common prefix search
-trie.mmap("sample.dic")
-agent.set_query("ice-cream soda")
+    # Reverse lookup by key ID (collect the strings)
+    agent2 = marisa.Agent()
+    rev_keys = []
+    for key_id in range(4):
+        agent2.set_query(key_id)
+        trie2.reverse_lookup(agent2)
+        rev_keys.append(agent2.key_str())
 
-while trie.common_prefix_search(agent):
-    print(f"{agent.query_str()}: {agent.key_str()} ({agent.key_id()})")
+    # The reverse lookup should return the same set of keys (order may or may not match)
+    assert set(rev_keys) == set(keys)
 
-# Perform predictive search
-agent.set_query("ic")
+    # Memory-map the trie and perform common prefix search
+    trie3 = marisa.Trie()
+    trie3.mmap(str(dic_path))
 
-while trie.predictive_search(agent):
-    print(f"{agent.query_str()}: {agent.key_str()} ({agent.key_id()})")
+    agent3 = marisa.Agent()
+    agent3.set_query("ice-cream soda")
+
+    prefixes = []
+    while trie3.common_prefix_search(agent3):
+        prefixes.append((agent3.key_str(), agent3.key_id()))
+
+    # For "ice-cream soda", common prefixes should include "ice" and "ice-cream"
+    prefix_strings = {k for k, _ in prefixes}
+    assert "ice" in prefix_strings
+    assert "ice-cream" in prefix_strings
+
+    # Predictive search for "ic" should include "ice" and "ice-cream"
+    agent3.set_query("ic")
+    preds = []
+    while trie3.predictive_search(agent3):
+        preds.append((agent3.key_str(), agent3.key_id()))
+
+    pred_strings = {k for k, _ in preds}
+    assert "ice" in pred_strings
+    assert "ice-cream" in pred_strings
