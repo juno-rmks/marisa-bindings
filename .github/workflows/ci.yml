@@ -25,4 +25,4 @@ jobs:
             - name: Build & install
               run: python -m pip install -v .
             - name: Test
-              run: python -m pip install -U pytest pytest-mock && pytest -q
+              run: python -m pip install -U pytest coverage pytest-benchmark pytest-mock && pytest -q
