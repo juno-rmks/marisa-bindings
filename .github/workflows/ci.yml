@@ -1,0 +1,28 @@
+name: CI
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    build-for-windows:
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [windows-latest]
+                python-version: ["3.10", "3.11", "3.12", "3.13"]
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-python@v5
+              with:
+                python-version: ${{ matrix.python-version }}
+
+            - name: Install SWIG
+              run: choco install -y swig
+            - name: Upgrade build tools
+              run: python -m pip install -U pip setuptools wheel
+            - name: Build & install
+              run: python -m pip install -v .
+            - name: Test
+              run: python -m pip install -U pytest pytest-mock && pytest -q

@@ -26,20 +26,20 @@ dynamic = ["version"]
 "Documentation" = "https://marisa-bindings.readthedocs.io/"
 
 [project.optional-dependencies]
-test = ["pytest", "coverage", "pytest-benchmark", "pytest-mock"]
-doc = [
-    "Sphinx==5.3.0",
-    "sphinx-intl==2.1.0",
-    "sphinx-rtd-theme==1.2.0",
-    "myst-parser==1.0.0",
-]
 dev = [
     "build",
     "twine",
     "pylint",
     "black",
     "isort",
-    "marisa-bindings[test,doc]",
+    "pytest",
+    "coverage",
+    "pytest-benchmark",
+    "pytest-mock",
+    "Sphinx==5.3.0",
+    "sphinx-intl==2.1.0",
+    "sphinx-rtd-theme==1.2.0",
+    "myst-parser==1.0.0",
 ]
 
 [tool.setuptools.dynamic]
