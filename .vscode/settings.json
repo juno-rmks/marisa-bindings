@@ -3,8 +3,8 @@
         "editor.defaultFormatter": "ms-python.black-formatter",
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
-        },
+            "source.organizeImports": "always"
+        }
     },
     "pylint.args": [
         "--max-line-length",
@@ -16,5 +16,5 @@
     "isort.args": [
         "--profile",
         "black"
-    ],
+    ]
 }
