@@ -1,3 +1,21 @@
-recursive-include marisa-trie/include *.h
-recursive-include marisa-trie/lib *.h
-include marisa-trie/bindings/marisa-swig.h
+# Vendoring metadata
+include third_party/marisa-trie/VENDORING.md
+
+# Upstream license / attribution (optional but recommended)
+include third_party/marisa-trie/upstream/AUTHORS
+include third_party/marisa-trie/upstream/COPYING.md
+
+# Headers & sources required to build the extension from sdist
+recursive-include third_party/marisa-trie/upstream/include *.h
+recursive-include third_party/marisa-trie/upstream/lib *.h *.cc
+
+# SWIG interface & companion sources used by setup.py
+include third_party/marisa-trie/upstream/bindings/marisa-swig.i
+include third_party/marisa-trie/upstream/bindings/marisa-swig.cxx
+include third_party/marisa-trie/upstream/bindings/marisa-swig.h
+
+# Guard: never ship SWIG generated artifacts if they appear locally
+exclude third_party/marisa-trie/upstream/bindings/*_wrap.c
+exclude third_party/marisa-trie/upstream/bindings/*_wrap.cxx
+exclude third_party/marisa-trie/upstream/bindings/*_wrap.cpp
+exclude third_party/marisa-trie/upstream/bindings/marisa.py
