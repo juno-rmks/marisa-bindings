@@ -49,7 +49,7 @@ jobs:
       - name: Validate distributions (twine check)
         run: python -m twine check dist/*
 
-      - name: Smoke test (Linux/macOS)
+      - name: Smoke test (Linux/macOS) - install wheel
         if: runner.os != 'Windows'
         shell: bash
         run: |
@@ -59,7 +59,7 @@ jobs:
           python -m pip install dist/*.whl
           python -c "import marisa_bindings._marisa; print('wheel import OK')"
 
-      - name: Smoke test (Windows)
+      - name: Smoke test (Windows) - install wheel
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
@@ -69,25 +69,25 @@ jobs:
           python -m pip install dist\*.whl
           python -c "import marisa_bindings._marisa; print('wheel import OK')"
 
-      - name: Smoke test (install sdist)
+      - name: Smoke test (Linux/macOS) - install sdist
+        if: runner.os != 'Windows'
+        shell: bash
         run: |
           python -m venv .venv-sdist
           . .venv-sdist/bin/activate
           python -m pip install -U pip
           python -m pip install dist/*.tar.gz
           python -c "import marisa_bindings._marisa; print('sdist import OK')"
-        shell: bash
-        if: runner.os != 'Windows'
 
-      - name: Smoke test (install sdist) - Windows
+      - name: Smoke test (Windows) - install sdist
+        if: runner.os == 'Windows'
+        shell: pwsh
         run: |
           python -m venv .venv-sdist
           .\.venv-sdist\Scripts\Activate.ps1
           python -m pip install -U pip
           python -m pip install dist\*.tar.gz
           python -c "import marisa_bindings._marisa; print('sdist import OK')"
-        shell: pwsh
-        if: runner.os == 'Windows'
 
       - name: Upload dist artifacts
         uses: actions/upload-artifact@v4
