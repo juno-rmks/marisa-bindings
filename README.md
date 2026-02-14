@@ -1,56 +1,95 @@
 # marisa-bindings
 
-This is an unofficial project that provides Python bindings for the MARISA
-Trie, which is implemented in C++ using SWIG.
+[![CI](https://github.com/juno-rmks/marisa-bindings/actions/workflows/ci.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions)
+[![PyPI version](https://img.shields.io/pypi/v/marisa-bindings.svg)](https://pypi.org/project/marisa-bindings/)
+[![Python versions](https://img.shields.io/pypi/pyversions/marisa-bindings.svg)](https://pypi.org/project/marisa-bindings/)
+[![License](https://img.shields.io/pypi/l/marisa-bindings.svg)](LICENSE)
+
+This project provides Python bindings for the MARISA Trie library implemented in C++ using SWIG.
 
 ## Installation
 
-It is recommended to use a Python virtual environment to isolate dependencies
-and avoid conflicts. To create and activate a virtual environment, run:
+Using a virtual environment is recommended to isolate dependencies and avoid conflicts.
 
-```console
-% python -m venv .venv
-% . .venv/bin/activate
+```bash
+python -m venv .venv
+source .venv/bin/activate
 ```
 
-### Installing from PyPI
+### Install from PyPI
 
-To install `marisa-bindings` from PyPI into your virtual environment, run:
-
-```console
-% pip install marisa-bindings
+```bash
+pip install marisa-bindings
 ```
 
-### Installing from GitHub
+### Install from GitHub
 
-Alternatively, if you prefer to install `marisa-bindings` directly from
-the GitHub repository, use:
-
-```console
-% pip install git+https://github.com/juno-rmks/marisa-bindings.git
+```bash
+pip install git+https://github.com/juno-rmks/marisa-bindings.git
 ```
+
+## Binary Distribution and Source Builds
+
+Prebuilt wheels may be available for selected platforms.
+
+If no compatible wheel is available for your system, pip will automatically build the package from source.
+
+### Requirements for Building from Source
+
+Building from source requires:
+
+- a C++14 compatible compiler
+- SWIG (version 4.x recommended)
+- Python development headers
+
+Typical compilers by platform:
+
+| Platform | Compiler                         |
+| -------- | -------------------------------- |
+| Linux    | GCC or Clang                     |
+| macOS    | Xcode Command Line Tools         |
+| Windows  | MSVC (Visual Studio Build Tools) |
 
 ## Usage
 
-To get started with `marisa_bindings`, import the `marisa` module, which
-provides access to the MARISA trie functionalities:
+Import the module:
 
 ```python
 from marisa_bindings import marisa
 ```
 
-For more detailed usage examples, refer to the [`marisa-bindings-sample.py`](marisa-bindings-sample.py) file.
+For complete usage examples, see:
+
+```
+marisa-bindings-sample.py
+```
+
+## Vendored Upstream Source
+
+This project vendors the upstream MARISA Trie source code to ensure build reproducibility and long-term stability.
+
+The vendored source is pinned to a specific upstream revision and stored under:
+
+```
+third_party/marisa-trie/upstream/
+```
+
+The vendoring policy and update procedure are documented in:
+
+```
+third_party/marisa-trie/VENDORING.md
+```
 
 ## License
 
-This project is licensed under the following terms:
+This project includes code derived from the upstream MARISA Trie project.
 
-- **Wrapped Code**: The wrapped code in this repository is licensed under
-  the BSD 2-Clause License.
-- **Original marisa-trie Code**: The original marisa-trie code is dual-licensed
-  under the BSD 2-Clause License and the LGPL 2.1 or any later version.
+Licensing summary:
 
-For more details, please see the [LICENSE](LICENSE) file.
+- Wrapper code: BSD 2-Clause
+- Upstream MARISA Trie: BSD 2-Clause OR LGPL 2.1+
+
+See `LICENSE` for full license texts.
 
 ## Acknowledgments
 
