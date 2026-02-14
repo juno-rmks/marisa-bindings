@@ -1,0 +1,96 @@
+name: Artifacts
+run-name: Build artifacts (sdist/wheel) and smoke-test them across OS
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  package-build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.10"]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install SWIG (Windows)
+        if: runner.os == 'Windows'
+        run: choco install -y swig
+
+      - name: Install SWIG (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew update
+          brew install swig
+
+      - name: Install SWIG (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y swig
+
+      - name: Upgrade packaging tools
+        run: python -m pip install -U pip build twine
+
+      - name: Build sdist and wheel
+        run: python -m build
+
+      - name: Validate distributions (twine check)
+        run: python -m twine check dist/*
+
+      - name: Smoke test (Linux/macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          python -m venv .venv-wheel
+          . .venv-wheel/bin/activate
+          python -m pip install -U pip
+          python -m pip install dist/*.whl
+          python -c "import marisa_bindings._marisa; print('wheel import OK')"
+
+      - name: Smoke test (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          python -m venv .venv-wheel
+          .\.venv-wheel\Scripts\Activate.ps1
+          python -m pip install -U pip
+          python -m pip install dist\*.whl
+          python -c "import marisa_bindings._marisa; print('wheel import OK')"
+
+      - name: Smoke test (install sdist)
+        run: |
+          python -m venv .venv-sdist
+          . .venv-sdist/bin/activate
+          python -m pip install -U pip
+          python -m pip install dist/*.tar.gz
+          python -c "import marisa_bindings._marisa; print('sdist import OK')"
+        shell: bash
+        if: runner.os != 'Windows'
+
+      - name: Smoke test (install sdist) - Windows
+        run: |
+          python -m venv .venv-sdist
+          .\.venv-sdist\Scripts\Activate.ps1
+          python -m pip install -U pip
+          python -m pip install dist\*.tar.gz
+          python -c "import marisa_bindings._marisa; print('sdist import OK')"
+        shell: pwsh
+        if: runner.os == 'Windows'
+
+      - name: Upload dist artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ runner.os }}-py${{ matrix.python }}
+          path: dist/*
