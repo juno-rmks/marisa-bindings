@@ -66,7 +66,9 @@ jobs:
           python -m venv .venv-wheel
           .\.venv-wheel\Scripts\Activate.ps1
           python -m pip install -U pip
-          python -m pip install dist\*.whl
+          $wheel = Get-ChildItem dist -Filter *.whl | Select-Object -First 1
+          if (-not $wheel) { throw "No wheel found in dist/" }
+          python -m pip install $wheel.FullName
           python -c "import marisa_bindings._marisa; print('wheel import OK')"
 
       - name: Smoke test (Linux/macOS) - install sdist
@@ -86,7 +88,9 @@ jobs:
           python -m venv .venv-sdist
           .\.venv-sdist\Scripts\Activate.ps1
           python -m pip install -U pip
-          python -m pip install dist\*.tar.gz
+          $sdist = Get-ChildItem dist -Filter *.tar.gz | Select-Object -First 1
+          if (-not $sdist) { throw "No sdist found in dist/" }
+          python -m pip install $sdist.FullName
           python -c "import marisa_bindings._marisa; print('sdist import OK')"
 
       - name: Upload dist artifacts
