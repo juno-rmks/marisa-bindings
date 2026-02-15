@@ -3,6 +3,7 @@
 [![CI](https://github.com/juno-rmks/marisa-bindings/actions/workflows/ci.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/ci.yaml)
 [![Artifacts](https://github.com/juno-rmks/marisa-bindings/actions/workflows/artifacts.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/artifacts.yaml)
 [![Release (TestPyPI)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/release-testpypi.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/release-testpypi.yaml)
+[![Release (PyPI)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/release-pypi.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/release-pypi.yaml)
 [![PyPI version](https://img.shields.io/pypi/v/marisa-bindings.svg)](https://pypi.org/project/marisa-bindings/)
 [![Python versions](https://img.shields.io/pypi/pyversions/marisa-bindings.svg)](https://pypi.org/project/marisa-bindings/)
 [![License](https://img.shields.io/github/license/juno-rmks/marisa-bindings.svg)](LICENSE)

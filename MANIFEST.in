@@ -1,3 +1,6 @@
+# Project license
+include LICENSE
+
 # Vendoring metadata
 include third_party/marisa-trie/VENDORING.md
 
