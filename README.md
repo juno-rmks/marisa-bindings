@@ -1,15 +1,19 @@
 # marisa-bindings
 
-[![CI](https://github.com/juno-rmks/marisa-bindings/actions/workflows/ci.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions)
+[![CI](https://github.com/juno-rmks/marisa-bindings/actions/workflows/ci.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/ci.yaml)
+[![Artifacts](https://github.com/juno-rmks/marisa-bindings/actions/workflows/artifacts.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/artifacts.yaml)
+[![Release (TestPyPI)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/release-testpypi.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/release-testpypi.yaml)
 [![PyPI version](https://img.shields.io/pypi/v/marisa-bindings.svg)](https://pypi.org/project/marisa-bindings/)
 [![Python versions](https://img.shields.io/pypi/pyversions/marisa-bindings.svg)](https://pypi.org/project/marisa-bindings/)
-[![License](https://img.shields.io/pypi/l/marisa-bindings.svg)](LICENSE)
+[![License](https://img.shields.io/github/license/juno-rmks/marisa-bindings.svg)](LICENSE)
 
-This project provides Python bindings for the MARISA Trie library implemented in C++ using SWIG.
+Python bindings for the **MARISA Trie** library implemented in C++ using **SWIG**.
+
+> This is an unofficial binding project and is not affiliated with the original MARISA authors.
 
 ## Installation
 
-Using a virtual environment is recommended to isolate dependencies and avoid conflicts.
+It is recommended to use a virtual environment to isolate dependencies.
 
 ```bash
 python -m venv .venv
@@ -28,69 +32,70 @@ pip install marisa-bindings
 pip install git+https://github.com/juno-rmks/marisa-bindings.git
 ```
 
-## Binary Distribution and Source Builds
+## Build requirements (source install only)
 
-Prebuilt wheels may be available for selected platforms.
+If a prebuilt wheel is not available for your platform, the package will be built locally.
+In that case you need:
 
-If no compatible wheel is available for your system, pip will automatically build the package from source.
-
-### Requirements for Building from Source
-
-Building from source requires:
-
-- a C++14 compatible compiler
-- SWIG (version 4.x recommended)
+- A C++ compiler toolchain
+- SWIG ≥ 4.0
 - Python development headers
 
-Typical compilers by platform:
+### Linux
 
-| Platform | Compiler                         |
-| -------- | -------------------------------- |
-| Linux    | GCC or Clang                     |
-| macOS    | Xcode Command Line Tools         |
-| Windows  | MSVC (Visual Studio Build Tools) |
+```bash
+sudo apt install build-essential python3-dev swig
+```
+
+### macOS
+
+```bash
+xcode-select --install
+brew install swig
+```
+
+### Windows
+
+Install **Visual Studio Build Tools** (or Visual Studio) with the workload:
+
+- **Desktop development with C++**
 
 ## Usage
-
-Import the module:
 
 ```python
 from marisa_bindings import marisa
 ```
 
-For complete usage examples, see:
+For a complete example, see:
 
-```
-marisa-bindings-sample.py
-```
+- `marisa-bindings-sample.py`
 
-## Vendored Upstream Source
+## Vendoring policy
 
-This project vendors the upstream MARISA Trie source code to ensure build reproducibility and long-term stability.
+This project vendors the upstream MARISA source using **git subtree** to ensure:
 
-The vendored source is pinned to a specific upstream revision and stored under:
+- reproducible builds
+- long-term stability
+- independence from upstream availability
 
-```
-third_party/marisa-trie/upstream/
-```
+Vendored upstream source lives here:
 
-The vendoring policy and update procedure are documented in:
+- `third_party/marisa-trie/upstream/`
 
-```
-third_party/marisa-trie/VENDORING.md
-```
+Do not modify vendored files directly.
+If changes are required, prefer upstream contributions; otherwise keep local patches minimal.
 
 ## License
 
-This project includes code derived from the upstream MARISA Trie project.
+This repository contains multiple components under different licenses:
 
-Licensing summary:
+| Component                            | License                       |
+| ------------------------------------ | ----------------------------- |
+| Bindings code in this repository     | BSD-2-Clause                  |
+| Upstream MARISA Trie (`marisa-trie`) | BSD-2-Clause **or** LGPL-2.1+ |
 
-- Wrapper code: BSD 2-Clause
-- Upstream MARISA Trie: BSD 2-Clause OR LGPL 2.1+
-
-See `LICENSE` for full license texts.
+See `LICENSE` and the vendored upstream license files for details.
 
 ## Acknowledgments
 
-Special thanks to the original authors of the MARISA library for their work.
+Special thanks to the original authors of MARISA Trie for creating the library.

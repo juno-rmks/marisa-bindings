@@ -1,7 +1,8 @@
 # marisa-bindings
 
-This is an unofficial project that provides Python bindings for the MARISA
-Trie, which is implemented in C++ using SWIG.s
+Python bindings for the **MARISA Trie** library implemented in C++ using **SWIG**.
+
+> This is an unofficial binding project and is not affiliated with the original MARISA authors.
 
 ## API Reference
 
