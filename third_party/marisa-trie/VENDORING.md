@@ -1,0 +1,74 @@
+# Vendoring Record: MARISA Trie (git subtree)
+
+This directory exists to ensure build reproducibility and long-term stability
+for `marisa-bindings` by pinning the upstream MARISA Trie source at a known
+revision.
+
+The upstream source is vendored via **git subtree**.
+Git submodules and build-time downloads are intentionally avoided.
+
+## Upstream Information
+
+- Project: MARISA Trie
+- Upstream repository: https://github.com/s-yata/marisa-trie
+- Upstream commit (subtree split):
+  https://github.com/s-yata/marisa-trie/commit/006020c1df76d0d7dc6118dacc22da64da2e35c4
+- Vendoring method: git subtree
+
+### Pinned Revision
+
+- git-subtree directory: `marisa-trie` (historical)
+- Current vendored location: `third_party/marisa-trie/upstream/`
+- Upstream commit (subtree split): `006020c1df76d0d7dc6118dacc22da64da2e35c4`
+- Import commit in this repository: `73f1cd7c566ec4c59a01fcf128bc60d06e58c6cc`
+- Imported on: 2024-08-26 (JST)
+
+> Note: 
+> The authoritative pinned upstream revision is the `subtree split` commit above.
+
+## Directory Layout
+
+```text
+third_party/marisa-trie/
+|-- upstream/   Vendored upstream source (DO NOT EDIT)
+|-- patches/    Minimal patch set (only if unavoidable)
+\-- build/      CI/local helper scripts (optional)
+```
+
+## Policy (Important)
+
+1. Do not modify files under `upstream/` directly.
+2. If changes are required, prefer contributing upstream (PR) whenever possible.
+3. If upstream contribution is not feasible, add the smallest possible patch under `patches/`.
+4. Any change to the vendored upstream revision must update this document.
+5. CI must build and test on Linux/macOS/Windows after any vendoring change.
+6. Do not rewrite vendored history (no subtree split/filter operations).
+
+## Re-import / Update Procedure (Subtree)
+
+When updating the vendored upstream source:
+
+1. Decide the target upstream commit (or tag) to pin.
+2. Update the subtree (example command):
+
+    ```sh
+    git subtree pull --prefix third_party/marisa-trie/upstream https://github.com/s-yata/marisa-trie <REF> --squash
+    ```
+
+3. If patches exist, confirm whether they still apply (and keep them minimal).
+4. Run CI (Linux/macOS/Windows).
+5. Update the pinned revision information in this file.
+
+### Import Command Reference
+
+The upstream source was originally imported using:
+
+```sh
+git subtree add --prefix marisa-trie https://github.com/s-yata/marisa-trie 006020c1df76d0d7dc6118dacc22da64da2e35c4 --squash
+```
+
+## License
+
+Follow the upstream license terms.
+If the upstream source (or its derivatives) are distributed as part of this project,
+ensure that the license text is included and kept unmodified.

@@ -1,57 +1,101 @@
 # marisa-bindings
 
-This is an unofficial project that provides Python bindings for the MARISA
-Trie, which is implemented in C++ using SWIG.
+[![CI](https://github.com/juno-rmks/marisa-bindings/actions/workflows/ci.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/ci.yaml)
+[![Artifacts](https://github.com/juno-rmks/marisa-bindings/actions/workflows/artifacts.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/artifacts.yaml)
+[![Release (TestPyPI)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/release-testpypi.yaml/badge.svg)](https://github.com/juno-rmks/marisa-bindings/actions/workflows/release-testpypi.yaml)
+[![PyPI version](https://img.shields.io/pypi/v/marisa-bindings.svg)](https://pypi.org/project/marisa-bindings/)
+[![Python versions](https://img.shields.io/pypi/pyversions/marisa-bindings.svg)](https://pypi.org/project/marisa-bindings/)
+[![License](https://img.shields.io/github/license/juno-rmks/marisa-bindings.svg)](LICENSE)
+
+Python bindings for the **MARISA Trie** library implemented in C++ using **SWIG**.
+
+> This is an unofficial binding project and is not affiliated with the original MARISA authors.
 
 ## Installation
 
-It is recommended to use a Python virtual environment to isolate dependencies
-and avoid conflicts. To create and activate a virtual environment, run:
+It is recommended to use a virtual environment to isolate dependencies.
 
-```console
-% python -m venv .venv
-% . .venv/bin/activate
+```bash
+python -m venv .venv
+source .venv/bin/activate
 ```
 
-### Installing from PyPI
+### Install from PyPI
 
-To install `marisa-bindings` from PyPI into your virtual environment, run:
-
-```console
-% pip install marisa-bindings
+```bash
+pip install marisa-bindings
 ```
 
-### Installing from GitHub
+### Install from GitHub
 
-Alternatively, if you prefer to install `marisa-bindings` directly from
-the GitHub repository, use:
-
-```console
-% pip install git+https://github.com/juno-rmks/marisa-bindings.git
+```bash
+pip install git+https://github.com/juno-rmks/marisa-bindings.git
 ```
+
+## Build requirements (source install only)
+
+If a prebuilt wheel is not available for your platform, the package will be built locally.
+In that case you need:
+
+- A C++ compiler toolchain
+- SWIG ≥ 4.0
+- Python development headers
+
+### Linux
+
+```bash
+sudo apt install build-essential python3-dev swig
+```
+
+### macOS
+
+```bash
+xcode-select --install
+brew install swig
+```
+
+### Windows
+
+Install **Visual Studio Build Tools** (or Visual Studio) with the workload:
+
+- **Desktop development with C++**
 
 ## Usage
-
-To get started with `marisa_bindings`, import the `marisa` module, which
-provides access to the MARISA trie functionalities:
 
 ```python
 from marisa_bindings import marisa
 ```
 
-For more detailed usage examples, refer to the [`marisa-bindings-sample.py`](marisa-bindings-sample.py) file.
+For a complete example, see:
+
+- `marisa-bindings-sample.py`
+
+## Vendoring policy
+
+This project vendors the upstream MARISA source using **git subtree** to ensure:
+
+- reproducible builds
+- long-term stability
+- independence from upstream availability
+
+Vendored upstream source lives here:
+
+- `third_party/marisa-trie/upstream/`
+
+Do not modify vendored files directly.
+If changes are required, prefer upstream contributions; otherwise keep local patches minimal.
 
 ## License
 
-This project is licensed under the following terms:
+This repository contains multiple components under different licenses:
 
-- **Wrapped Code**: The wrapped code in this repository is licensed under
-  the BSD 2-Clause License.
-- **Original marisa-trie Code**: The original marisa-trie code is dual-licensed
-  under the BSD 2-Clause License and the LGPL 2.1 or any later version.
+| Component                            | License                       |
+| ------------------------------------ | ----------------------------- |
+| Bindings code in this repository     | BSD-2-Clause                  |
+| Upstream MARISA Trie (`marisa-trie`) | BSD-2-Clause **or** LGPL-2.1+ |
 
-For more details, please see the [LICENSE](LICENSE) file.
+See `LICENSE` and the vendored upstream license files for details.
 
 ## Acknowledgments
 
-Special thanks to the original authors of the MARISA library for their work.
+Special thanks to the original authors of MARISA Trie for creating the library.
