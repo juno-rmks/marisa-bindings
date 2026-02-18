@@ -3,4 +3,4 @@
 the MARISA Trie, which is implemented in C++ using SWIG.
 """
 
-__version__ = '1.0.3'
+__version__ = '1.0.4rc1'
