@@ -4,7 +4,8 @@ run-name: TestPyPI ${{ github.ref_name }} by ${{ github.actor }}
 on:
   push:
     tags:
-      - "marisa-bindings-v1.*"
+      - "marisa-bindings-v*"
+  workflow_dispatch:
 
 permissions:
   contents: read
