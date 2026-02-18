@@ -9,16 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added support for building Python 3.14 wheels via cibuildwheel v3.
+- Added support for building Python 3.14 wheels.
 
 ### Changed
 
-- Updated GitHub Actions trigger rules to clarify workflow execution conditions.
+- Upgraded to cibuildwheel v3.
 - Updated wheel build environment to use Python 3.11 or later for running cibuildwheel.
+- Refined GitHub Actions trigger rules to clarify workflow execution conditions.
 
 ### Fixed
 
-- Fixed an issue where Python 3.14 wheels were not generated during CI builds.
+- Resolved an issue where Python 3.14 wheels were not generated in CI builds.
 
 ## [1.0.3] - 2026-02-16
 
