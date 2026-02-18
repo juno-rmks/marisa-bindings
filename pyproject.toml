@@ -7,7 +7,7 @@ authors = [
     { name = "Nobuyuki Sekimori", email = "43375309+juno-rmks@users.noreply.github.com" },
 ]
 name = "marisa-bindings"
-description = "Python bindings for the MARISA Trie library implemented in C++ using SWIG."
+description = "Thin Python bindings for the C++ MARISA Trie library implemented using SWIG."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "BSD-2-Clause"

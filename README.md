@@ -8,9 +8,15 @@
 [![Python versions](https://img.shields.io/pypi/pyversions/marisa-bindings.svg)](https://pypi.org/project/marisa-bindings/)
 [![License](https://img.shields.io/github/license/juno-rmks/marisa-bindings.svg)](LICENSE)
 
-Python bindings for the **MARISA Trie** library implemented in C++ using **SWIG**.
+Thin Python bindings for the C++ **MARISA Trie** library implemented using **SWIG**.
 
 > This is an unofficial binding project and is not affiliated with the original MARISA authors.
+
+## Who is this for?
+
+- You want to use **MARISA Trie** from Python with a **thin wrapper** (keeping the upstream API feel).
+- You prefer **upstream-faithful** bindings over a Pythonic re-design.
+- You want **reproducible builds** and a pinned upstream source (vendored via git subtree).
 
 ## Installation
 
@@ -33,6 +39,23 @@ pip install marisa-bindings
 pip install git+https://github.com/juno-rmks/marisa-bindings.git
 ```
 
+## Prebuilt wheel availability
+
+Prebuilt wheels are provided for the following targets:
+
+| OS      | Architecture / ABI | Python    |
+| ------- | ------------------ | --------- |
+| Linux   | x86_64 (manylinux) | 3.10–3.14 |
+| Linux   | i686 (manylinux)   | 3.10–3.14 |
+| Linux   | x86_64 (musllinux) | 3.10–3.14 |
+| Linux   | i686 (musllinux)   | 3.10–3.14 |
+| Windows | x86_64             | 3.10–3.14 |
+| Windows | x86                | 3.10–3.14 |
+| macOS   | arm64              | 3.10–3.14 |
+
+If your environment is not covered, `pip` will fall back to building from source.
+See **Build requirements (source install only)** below.
+
 ## Build requirements (source install only)
 
 If a prebuilt wheel is not available for your platform, the package will be built locally.
@@ -47,6 +70,8 @@ In that case you need:
 ```bash
 sudo apt install build-essential python3-dev swig
 ```
+
+Package names may vary depending on your distribution.
 
 ### macOS
 
@@ -85,6 +110,8 @@ Vendored upstream source lives here:
 
 Do not modify vendored files directly.
 If changes are required, prefer upstream contributions; otherwise keep local patches minimal.
+
+The pinned upstream revision is documented in `VENDORING.md`.
 
 ## License
 
