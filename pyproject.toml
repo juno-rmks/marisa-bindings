@@ -56,6 +56,9 @@ profile = "black"
 addopts = ["--import-mode=importlib", "--benchmark-skip"]
 filterwarnings = ["error"]
 testpaths = ["tests"]
+markers = [
+    "benchmark: performance benchmarks (skipped by default; run with -m benchmark)",
+]
 
 [tool.coverage.run]
 source = ["src"]

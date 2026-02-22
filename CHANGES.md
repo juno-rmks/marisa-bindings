@@ -5,17 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.4rc1] - 2026-02-18
+## [1.0.4rc1] - 2026-02-22
 
 ### Added
 
 - Added support for building Python 3.14 wheels.
+- Added benchmark test suite based on pytest-benchmark.
+- Added benchmark results section to README.
 
 ### Changed
 
 - Upgraded to cibuildwheel v3.
 - Updated wheel build environment to use Python 3.11 or later for running cibuildwheel.
 - Refined GitHub Actions trigger rules to clarify workflow execution conditions.
+- Improved README structure and documentation clarity.
 
 ### Fixed
 

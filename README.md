@@ -14,13 +14,27 @@ Thin Python bindings for the C++ **MARISA Trie** library implemented using **SWI
 
 ## Who is this for?
 
-- You want to use **MARISA Trie** from Python with a **thin wrapper** (keeping the upstream API feel).
-- You prefer **upstream-faithful** bindings over a Pythonic re-design.
-- You want **reproducible builds** and a pinned upstream source (vendored via git subtree).
+- You want to use **MARISA Trie** from Python with a **thin wrapper** that preserves the upstream API.
+- You prefer **upstream-faithful bindings** over a Pythonic redesign.
+- You want **reproducible builds** with a pinned upstream source (vendored via git subtree).
+- You need bindings that behave exactly like the upstream library.
+
+## Design Policy
+
+This project intentionally provides a thin binding layer over MARISA Trie.
+
+Design principles:
+
+- Preserve upstream API behavior
+- Avoid adding abstraction layers
+- Minimize divergence from upstream
+- Ensure reproducible builds
+
+This library is not intended to be a Pythonic wrapper. It prioritizes fidelity to the original MARISA API.
 
 ## Installation
 
-It is recommended to use a virtual environment to isolate dependencies.
+A virtual environment is recommended to isolate dependencies.
 
 ```bash
 python -m venv .venv
@@ -53,15 +67,14 @@ Prebuilt wheels are provided for the following targets:
 | Windows | x86                | 3.10–3.14 |
 | macOS   | arm64              | 3.10–3.14 |
 
-If your environment is not covered, `pip` will fall back to building from source.
-See **Build requirements (source install only)** below.
+If your platform is not listed, `pip` will build from source.
+See **Build requirements** below.
 
 ## Build requirements (source install only)
 
-If a prebuilt wheel is not available for your platform, the package will be built locally.
-In that case you need:
+If a prebuilt wheel is unavailable, local compilation is required:
 
-- A C++ compiler toolchain
+- C++ compiler toolchain
 - SWIG ≥ 4.0
 - Python development headers
 
@@ -82,9 +95,9 @@ brew install swig
 
 ### Windows
 
-Install **Visual Studio Build Tools** (or Visual Studio) with the workload:
+Install **Visual Studio Build Tools** with:
 
-- **Desktop development with C++**
+- Desktop development with C++
 
 ## Usage
 
@@ -92,38 +105,72 @@ Install **Visual Studio Build Tools** (or Visual Studio) with the workload:
 from marisa_bindings import marisa
 ```
 
-For a complete example, see:
+See `marisa-bindings-sample.py` for a complete example.
 
-- `marisa-bindings-sample.py`
+## Benchmarks
 
-## Vendoring policy
+Benchmarks are provided under `tests/` and can be executed with **pytest-benchmark**.
 
-This project vendors the upstream MARISA source using **git subtree** to ensure:
+### Run
+
+```bash
+python -m pip install -U ".[dev]"
+python -m pytest -q -m benchmark --benchmark-only
+```
+
+Lower is better for latency columns; higher is better for OPS.
+
+### Latest baseline (macOS arm64)
+
+| Benchmark                          | Mean (us) | Median (us) |        OPS |
+| ---------------------------------- | --------: | ----------: | ---------: |
+| build trie (small)                 | 16,122.46 |   16,029.65 |      62.03 |
+| lookup hit (small)                 |    101.38 |      100.83 |   9,863.57 |
+| lookup miss (small)                |    413.12 |      411.25 |   2,420.58 |
+| common prefix search (small)       |      1.69 |        1.60 | 599,433.23 |
+| predictive search (small)          |     11.25 |       11.17 |  88,917.68 |
+| lookup hit vs marisa-trie (Cython) |     13.63 |       13.50 |  73,366.88 |
+
+**Environment**
+
+- macOS 15
+- Apple Silicon (ARM64)
+- Python 3.10
+
+**Notes**
+
+- Results vary depending on CPU scaling, thermal conditions, and background load.
+
+## Vendoring Policy
+
+This project vendors upstream MARISA source using **git subtree** to ensure:
 
 - reproducible builds
 - long-term stability
 - independence from upstream availability
 
-Vendored upstream source lives here:
+Vendored upstream source:
 
-- `third_party/marisa-trie/upstream/`
+```
+third_party/marisa-trie/upstream/
+```
 
 Do not modify vendored files directly.
-If changes are required, prefer upstream contributions; otherwise keep local patches minimal.
+If changes are needed, prefer upstream contributions or keep patches minimal.
 
-The pinned upstream revision is documented in `VENDORING.md`.
+Pinned upstream revision is documented in `VENDORING.md`.
 
 ## License
 
-This repository contains multiple components under different licenses:
+This repository contains components under different licenses:
 
-| Component                            | License                       |
-| ------------------------------------ | ----------------------------- |
-| Bindings code in this repository     | BSD-2-Clause                  |
-| Upstream MARISA Trie (`marisa-trie`) | BSD-2-Clause **or** LGPL-2.1+ |
+| Component            | License                       |
+| -------------------- | ----------------------------- |
+| Bindings code        | BSD-2-Clause                  |
+| Upstream MARISA Trie | BSD-2-Clause **or** LGPL-2.1+ |
 
-See `LICENSE` and the vendored upstream license files for details.
+See `LICENSE` and vendored license files for details.
 
 ## Acknowledgments
 
-Special thanks to the original authors of MARISA Trie for creating the library.
+Special thanks to the original authors of MARISA Trie.
