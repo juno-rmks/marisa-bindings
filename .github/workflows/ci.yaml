@@ -26,22 +26,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install SWIG (Windows)
-        if: runner.os == 'Windows'
-        run: choco install -y swig
-
-      - name: Install SWIG (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          brew update
-          brew install swig
-
-      - name: Install SWIG (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y swig
-
       - name: Upgrade build tools
         run: python -m pip install -U pip setuptools wheel
 
