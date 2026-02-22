@@ -10,4 +10,4 @@ This project vendors the upstream source to ensure reproducible builds,
 while keeping the implementation faithful to the original API.
 """
 
-__version__ = '1.0.4rc1'
+__version__ = '1.0.4rc2'
