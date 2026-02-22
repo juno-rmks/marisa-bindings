@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.5rc1] - 2026-02-22
+## [1.0.5] - 2026-02-22
 
 ### Changed
 
-- Switched to vendored SWIG-generated binding sources to remove build-time SWIG dependency.
+- Switched to vendored SWIG-generated binding sources, removing the build-time SWIG dependency.
 - Updated packaging configuration to use pre-generated wrapper sources instead of `.i` files.
 - Adjusted MANIFEST and build configuration to exclude upstream SWIG artifacts.
 - Clarified vendoring policy for bindings layer in documentation.
@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Removed SWIG from build-system requirements.
-- Removed runtime reliance on system SWIG during `wheel/sdist builds`.
+- Removed reliance on system SWIG during wheel and sdist builds.
 
 ## [1.0.4] - 2026-02-22
 
