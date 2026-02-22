@@ -300,10 +300,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,macos,windows,visualstudiocode,python,c++
-
-# SWIG generated files (do not vendor)
-third_party/marisa-trie/upstream/bindings/*_wrap.c*
-third_party/marisa-trie/upstream/bindings/*_wrap.cpp
-third_party/marisa-trie/upstream/bindings/*.py
-third_party/marisa-trie/upstream/bindings/*.pyc
-third_party/marisa-trie/upstream/bindings/__pycache__/

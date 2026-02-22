@@ -75,13 +75,15 @@ See **Build requirements** below.
 If a prebuilt wheel is unavailable, local compilation is required:
 
 - C++ compiler toolchain
-- SWIG ≥ 4.0
 - Python development headers
+
+> SWIG is not required.
+> The binding sources are pre-generated and shipped with the distribution.
 
 ### Linux
 
 ```bash
-sudo apt install build-essential python3-dev swig
+sudo apt install build-essential python3-dev
 ```
 
 Package names may vary depending on your distribution.
@@ -90,7 +92,6 @@ Package names may vary depending on your distribution.
 
 ```bash
 xcode-select --install
-brew install swig
 ```
 
 ### Windows

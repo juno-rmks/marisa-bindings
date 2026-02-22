@@ -14,13 +14,13 @@ UPSTREAM = Path("third_party/marisa-trie/upstream")
 
 marisa_sources = [
     *[str(f) for f in (UPSTREAM / "lib/marisa").rglob("*.cc")],
-    str(UPSTREAM / "bindings/marisa-swig.i"),
-    str(UPSTREAM / "bindings/marisa-swig.cxx"),
+    str("bindings/marisa-swig.cxx"),
+    str("bindings/marisa-swig_wrap.cxx"),
 ]
 marisa_include_dirs = [
     str(UPSTREAM / "include"),
     str(UPSTREAM / "lib"),
-    str(UPSTREAM / "bindings"),
+    str("bindings"),
 ]
 
 marisa = Extension(
@@ -29,7 +29,6 @@ marisa = Extension(
     include_dirs=marisa_include_dirs,
     language="c++",
     extra_compile_args=extra_compile_args,
-    swig_opts=["-c++"],
 )
 
 setup(

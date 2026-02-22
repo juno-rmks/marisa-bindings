@@ -13,12 +13,7 @@ recursive-include third_party/marisa-trie/upstream/include *.h
 recursive-include third_party/marisa-trie/upstream/lib *.h *.cc
 
 # SWIG interface & companion sources used by setup.py
-include third_party/marisa-trie/upstream/bindings/marisa-swig.i
-include third_party/marisa-trie/upstream/bindings/marisa-swig.cxx
-include third_party/marisa-trie/upstream/bindings/marisa-swig.h
-
-# Guard: never ship SWIG generated artifacts if they appear locally
-exclude third_party/marisa-trie/upstream/bindings/*_wrap.c
-exclude third_party/marisa-trie/upstream/bindings/*_wrap.cxx
-exclude third_party/marisa-trie/upstream/bindings/*_wrap.cpp
-exclude third_party/marisa-trie/upstream/bindings/marisa.py
+include bindings/marisa-swig.i
+include bindings/marisa-swig.h
+include bindings/marisa-swig.cxx
+include bindings/marisa-swig_wrap.cxx
