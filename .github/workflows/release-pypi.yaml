@@ -4,7 +4,8 @@ run-name: PyPI ${{ github.ref_name }} by ${{ github.actor }}
 on:
   push:
     tags:
-      - "marisa-bindings-v1.*"
+      - "marisa-bindings-v*"
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,6 +13,7 @@ permissions:
 
 jobs:
   build-sdist:
+    if: ${{ !contains(github.ref_name, 'rc') }}
     name: Build sdist
     runs-on: ubuntu-latest
     steps:
@@ -41,6 +43,7 @@ jobs:
           path: dist/*
 
   build-wheels:
+    if: ${{ !contains(github.ref_name, 'rc') }}
     name: Build wheels (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
@@ -54,10 +57,10 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install build tools
-        run: python -m pip install -U pip cibuildwheel==2.* build twine
+        run: python -m pip install -U pip "cibuildwheel==3.*" build twine
 
       - name: Install SWIG (Windows)
         if: runner.os == 'Windows'
@@ -78,7 +81,7 @@ jobs:
       - name: Build wheels via cibuildwheel
         env:
           CIBW_BUILD: "cp310-* cp311-* cp312-* cp313-* cp314-*"
-          CIBW_SKIP: "pp*"
+          CIBW_SKIP: "pp* cp31?t-*"
           CIBW_TEST_COMMAND: 'python -c "import marisa_bindings._marisa"'
         run: python -m cibuildwheel --output-dir dist
 
@@ -92,6 +95,7 @@ jobs:
           path: dist/*.whl
 
   publish-pypi:
+    if: ${{ !contains(github.ref_name, 'rc') }}
     name: Publish to PyPI
     runs-on: ubuntu-latest
     needs: [build-sdist, build-wheels]

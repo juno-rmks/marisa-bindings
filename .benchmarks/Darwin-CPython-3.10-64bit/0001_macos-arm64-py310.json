@@ -1,0 +1,253 @@
+{
+    "machine_info": {
+        "node": "NEMESIS.local",
+        "processor": "arm",
+        "machine": "arm64",
+        "python_compiler": "Clang 17.0.0 (clang-1700.0.13.5)",
+        "python_implementation": "CPython",
+        "python_implementation_version": "3.10.17",
+        "python_version": "3.10.17",
+        "python_build": [
+            "main",
+            "Oct 25 2025 09:54:38"
+        ],
+        "release": "25.3.0",
+        "system": "Darwin",
+        "cpu": {
+            "python_version": "3.10.17.final.0 (64 bit)",
+            "cpuinfo_version": [
+                9,
+                0,
+                0
+            ],
+            "cpuinfo_version_string": "9.0.0",
+            "arch": "ARM_8",
+            "bits": 64,
+            "count": 8,
+            "arch_string_raw": "arm64",
+            "brand_raw": "Apple M1"
+        }
+    },
+    "commit_info": {
+        "id": "8341c437face7fbdead1fba169a448c1b0fe2fb9",
+        "time": "2026-02-18T23:51:23+09:00",
+        "author_time": "2026-02-18T23:51:23+09:00",
+        "dirty": true,
+        "project": "marisa-bindings",
+        "branch": "fix/build-release"
+    },
+    "benchmarks": [
+        {
+            "group": null,
+            "name": "test_build_trie_small",
+            "fullname": "tests/marisa_bindings/test_benchmark.py::test_build_trie_small",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 0.015851875010412186,
+                "max": 0.018188250018283725,
+                "mean": 0.016122457678354674,
+                "stddev": 0.00037812432028810623,
+                "rounds": 62,
+                "median": 0.01602964597987011,
+                "iqr": 5.816703196614981e-05,
+                "q1": 0.01601241697790101,
+                "q3": 0.01607058400986716,
+                "iqr_outliers": 8,
+                "stddev_outliers": 3,
+                "outliers": "3;8",
+                "ld15iqr": 0.015991291991667822,
+                "hd15iqr": 0.01624054100830108,
+                "ops": 62.02528299035682,
+                "total": 0.9995923760579899,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_lookup_hit_small",
+            "fullname": "tests/marisa_bindings/test_benchmark.py::test_lookup_hit_small",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 9.9916011095047e-05,
+                "max": 0.00023450001026503742,
+                "mean": 0.00010138317094764605,
+                "stddev": 2.894489822385032e-06,
+                "rounds": 8208,
+                "median": 0.00010083301458507776,
+                "iqr": 5.420006345957518e-07,
+                "q1": 0.00010054200538434088,
+                "q3": 0.00010108400601893663,
+                "iqr_outliers": 958,
+                "stddev_outliers": 507,
+                "outliers": "507;958",
+                "ld15iqr": 9.9916011095047e-05,
+                "hd15iqr": 0.00010191701585426927,
+                "ops": 9863.569965831872,
+                "total": 0.8321530671382789,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_lookup_miss_small",
+            "fullname": "tests/marisa_bindings/test_benchmark.py::test_lookup_miss_small",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 0.00040845898911356926,
+                "max": 0.0006460000004153699,
+                "mean": 0.0004131246517384824,
+                "stddev": 9.24682179652075e-06,
+                "rounds": 2401,
+                "median": 0.0004112499882467091,
+                "iqr": 2.916989615187049e-06,
+                "q1": 0.00041008301195688546,
+                "q3": 0.0004130000015720725,
+                "iqr_outliers": 188,
+                "stddev_outliers": 139,
+                "outliers": "139;188",
+                "ld15iqr": 0.00040845898911356926,
+                "hd15iqr": 0.0004174170026089996,
+                "ops": 2420.5769270651595,
+                "total": 0.9919122888240963,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_common_prefix_search_small",
+            "fullname": "tests/marisa_bindings/test_benchmark.py::test_common_prefix_search_small",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 1.541659003123641e-06,
+                "max": 0.0021964026673231274,
+                "mean": 1.6682425176393914e-06,
+                "stddev": 7.3311926829851575e-06,
+                "rounds": 196696,
+                "median": 1.5973346307873726e-06,
+                "iqr": 2.766804148753477e-08,
+                "q1": 1.5833356883376837e-06,
+                "q3": 1.6110037298252184e-06,
+                "iqr_outliers": 17808,
+                "stddev_outliers": 78,
+                "outliers": "78;17808",
+                "ld15iqr": 1.5553281021614869e-06,
+                "hd15iqr": 1.6526610124856234e-06,
+                "ops": 599433.2295373378,
+                "total": 0.3281366302495716,
+                "iterations": 3
+            }
+        },
+        {
+            "group": null,
+            "name": "test_predictive_search_small",
+            "fullname": "tests/marisa_bindings/test_benchmark.py::test_predictive_search_small",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 1.087499549612403e-05,
+                "max": 7.379200542345643e-05,
+                "mean": 1.1246357828608263e-05,
+                "stddev": 7.421232181669813e-07,
+                "rounds": 40679,
+                "median": 1.1166994227096438e-05,
+                "iqr": 1.66997779160738e-07,
+                "q1": 1.1083000572398305e-05,
+                "q3": 1.1249998351559043e-05,
+                "iqr_outliers": 3296,
+                "stddev_outliers": 657,
+                "outliers": "657;3296",
+                "ld15iqr": 1.087499549612403e-05,
+                "hd15iqr": 1.1540978448465466e-05,
+                "ops": 88917.67585913191,
+                "total": 0.4574905901099555,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_lookup_hit_small_vs_cython",
+            "fullname": "tests/marisa_bindings/test_benchmark.py::test_lookup_hit_small_vs_cython",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 1.333298860117793e-05,
+                "max": 8.150000940077007e-05,
+                "mean": 1.3630128357506612e-05,
+                "stddev": 1.0727441912841933e-06,
+                "rounds": 24292,
+                "median": 1.3500015484169126e-05,
+                "iqr": 1.240114215761423e-07,
+                "q1": 1.3458979083225131e-05,
+                "q3": 1.3582990504801273e-05,
+                "iqr_outliers": 2258,
+                "stddev_outliers": 310,
+                "outliers": "310;2258",
+                "ld15iqr": 1.333298860117793e-05,
+                "hd15iqr": 1.3790995581075549e-05,
+                "ops": 73366.88061703126,
+                "total": 0.3311030780605506,
+                "iterations": 1
+            }
+        }
+    ],
+    "datetime": "2026-02-22T00:17:53.113007+00:00",
+    "version": "5.2.3"
+}
