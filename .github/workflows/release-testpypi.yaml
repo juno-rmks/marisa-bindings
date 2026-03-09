@@ -59,7 +59,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install build tools
-        run: python -m pip install -U pip "cibuildwheel==3.0.1" build twine
+        run: python -m pip install -U pip "cibuildwheel==3.*" build twine
 
       - name: Build wheels via cibuildwheel
         env:
