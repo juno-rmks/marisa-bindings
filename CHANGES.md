@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.6] - 2026-03-10
+
+### Added
+
+- Added PEP 561 type support (py.typed).
+- Introduced marisa.pyi type stubs for the public API.
+- Added mypy-based typing tests (pytest -m typing).
+- Added Linux `aarch64` wheel builds.
+- Added macOS `x86_64` wheel builds.
+
+### Changed
+
+- Refined type definitions and overloads for improved static type checking.
+- Documented macOS `x86_64` wheel support in README.
+
 ## [1.0.5] - 2026-02-22
 
 ### Changed

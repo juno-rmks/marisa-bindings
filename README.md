@@ -57,15 +57,18 @@ pip install git+https://github.com/juno-rmks/marisa-bindings.git
 
 Prebuilt wheels are provided for the following targets:
 
-| OS      | Architecture / ABI | Python    |
-| ------- | ------------------ | --------- |
-| Linux   | x86_64 (manylinux) | 3.10–3.14 |
-| Linux   | i686 (manylinux)   | 3.10–3.14 |
-| Linux   | x86_64 (musllinux) | 3.10–3.14 |
-| Linux   | i686 (musllinux)   | 3.10–3.14 |
-| Windows | x86_64             | 3.10–3.14 |
-| Windows | x86                | 3.10–3.14 |
-| macOS   | arm64              | 3.10–3.14 |
+| OS      | Architecture / ABI  | Python    |
+| ------- | ------------------- | --------- |
+| Linux   | x86_64 (manylinux)  | 3.10–3.14 |
+| Linux   | i686 (manylinux)    | 3.10–3.14 |
+| Linux   | aarch64 (manylinux) | 3.10–3.14 |
+| Linux   | x86_64 (musllinux)  | 3.10–3.14 |
+| Linux   | i686 (musllinux)    | 3.10–3.14 |
+| Linux   | aarch64 (musllinux) | 3.10–3.14 |
+| Windows | x86_64              | 3.10–3.14 |
+| Windows | x86                 | 3.10–3.14 |
+| macOS   | arm64               | 3.10–3.14 |
+| macOS   | x86_64              | 3.10–3.14 |
 
 If your platform is not listed, `pip` will build from source.
 See **Build requirements** below.
